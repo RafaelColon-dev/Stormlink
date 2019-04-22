@@ -1,0 +1,267 @@
+import java.util.Comparator;
+
+public class Person implements Comparator {
+	private String firstName;
+	private String lastName;
+	private String city;
+	private String address;
+	private String state;
+	private int zip;
+	private String phoneNumber;
+	private String email;
+
+	/**
+	 * gets first name 
+	 *
+	 * @param none
+	 * @return String
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * This one sets first name and checks
+	 * if the first is null or empty.
+	 * 
+	 * @param firstName
+	 * @return void
+	 */
+	public void setFirstName(String firstName) {
+		if (!firstName.isEmpty()) {
+			this.firstName = firstName;
+		}
+	}
+
+	/**
+	 * gets last name 
+	 * 
+	 * 
+	 * @param none.
+	 * @return String
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * This one sets last name and checks
+	 * if the last is null or empty.
+	 * 
+	 * @param lastName
+	 * @return void
+	 */
+	public void setLastName(String lastName) {
+		if (!lastName.isEmpty()) {
+			this.lastName = lastName;
+		}
+	}
+
+	/**
+	 * gets city name 
+	 * 
+	 * @param none
+	 * @return String
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * This one sets city and checks
+	 * if the city is null or empty.
+	 * 
+	 * @param city
+	 * @return void
+	 */
+	public void setCity(String city) {
+		if (!city.isEmpty()) {
+			this.city = city;
+		}
+	}
+
+	/**
+	 * gets address  
+	 * 
+	 * @param none.
+	 * @return String
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 *  This one sets address and checks
+	 * if the address is null or empty.
+	 * 
+	 * @param address
+	 * @return void
+	 */
+	public void setAddress(String address) {
+		if (!address.isEmpty()) {
+			this.address = address;
+		}
+	}
+
+	/**
+	 * gets state  
+	 * 
+	 * @param none.
+	 * @return String 
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 *  This one sets state and checks
+	 * if the state is null or empty.
+	 * 
+	 * @param  state
+	 * @return void
+	 */
+	public void setState(String state) {
+		if (!state.isEmpty()) {
+			this.state = state;
+		}
+	}
+
+	/**
+	 * gets zip  
+	 * 
+	 * @param void 
+	 * @return int 
+	 */
+	public int getZip() {
+		return zip;
+	}
+
+	/**
+	 * This one sets zip and checks
+	 * if the zip is under for number and 
+	 * if zip is above five numbers.
+	 * 
+	 * @param zip
+	 * @return void
+	 */
+	public void setZip(int zip) {
+		// Checks for five digit zip code
+		if (zip < 99999 && zip > 9999) {
+			this.zip = zip;
+		}
+	}
+
+	/**
+	 * gets phone number  
+	 * 
+	 * @param void
+	 * @return String phoneNumber
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * This one sets phone number and checks
+	 * if the phone number is null or empty.
+	 * 
+	 * @param String phoneNumber
+	 * @return void
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		if (!phoneNumber.isEmpty()) {
+			this.phoneNumber = phoneNumber;
+		}
+	}
+
+	/**
+	 * gets email 
+	 * 
+	 * @param none
+	 * @return String email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * This one sets email and checks
+	 * if the email is null or empty.
+	 * 
+	 * @param String email
+	 * @return void
+	 */
+	public void setEmail(String email) {
+		if (!email.isEmpty()) {
+			this.email = email;
+		}
+	}
+
+	/**
+	 * This one is the constructor with all the field.
+	 * @param firstName
+	 * @param lastName
+	 * @param phoneNumber
+	 * @param email
+	 * @param address
+	 * @param city
+	 * @param state
+	 * @param zip
+	 */
+	public Person(String firstName, String lastName, String phoneNumber, String email, String address, String city,
+			String state, int zip) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
+
+	/**
+	 * This is the compare to method 
+	 * that compares the first name
+	 * to the the array first name.
+	 * 
+	 * @param person
+	 * @return int
+	 */
+	public int compareTo(Person person) {
+		return this.firstName.compareTo(person.getFirstName());
+	}
+
+	/**
+	 * This method is comparing the first name 
+	 * that users enters.
+	 * 
+	 * @param person
+	 * 
+	 */
+	public static Comparator<Person> fNameComparator = new Comparator<Person>() {
+		public int compare(Person person1, Person person2) {
+			return person1.getFirstName().compareTo(person2.getFirstName());
+		}
+	};
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 * the main to string with all constructors
+	 */
+	@Override
+	public String toString() {
+		return "\nName:\t\t" + firstName + " " + lastName + "\nCity:\t\t" + city + "\nAddress:\t" + address
+				+ "\nState:\t\t" + state + "\nZipcode:\t" + zip + "\nPhoneNumber:\t" + phoneNumber + "\nE-mail:\t\t"
+				+ email;	
+		}
+
+	/* (non-Javadoc)
+	 * This method compares objects.
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public int compare(Object o1, Object o2) {
+		return 0;
+	}
+}
