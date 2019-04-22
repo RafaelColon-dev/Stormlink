@@ -1,0 +1,57 @@
+
+public class Student extends Person {
+	/**
+	 * Constructor that reaches out to the super class of person, and establishes gpa for student
+	 * 
+	 * @param firstName
+	 * @param lastName
+	 * @param phoneNumber
+	 * @param email
+	 * @param address
+	 * @param city
+	 * @param state
+	 * @param zip
+	 * @param gpa
+	 * 
+	 * @return none.
+	 */
+	public Student(String firstName, String lastName, String phoneNumber, String email, String address, String city,
+			String state, int zip, double gpa) {
+		super(firstName, lastName, phoneNumber, email, address, city, state, zip);
+		this.gpa = gpa;
+	}
+
+	private double gpa;
+	/**
+	 * getGpa gets value for gpa.
+	 * 
+	 * @param None.
+	 * @return double.
+	 */
+	public double getGpa() {
+		return gpa;
+	}
+	
+	/**
+	 * setGpa sets gpa given by parameter to the field of gpa.
+	 * 
+	 * @param gpa
+	 * @return void, none.
+	 */
+	public void setGpa(double gpa) {
+		this.gpa = gpa;
+	}
+	
+	/**
+	 * 
+	 * @see Person#toString(), displays the toString from super of Person class
+	 * as well as the GPA for the subclass of Student.
+	 * 
+	 * @param void, none.
+	 * @return String 
+	 *  
+	 */
+	public String toString() {
+		return "\nGPA:\t\t" + Double.toString(gpa)+super.toString() ;
+	}
+}
