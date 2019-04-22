@@ -1,0 +1,242 @@
+
+import java.util.Scanner;
+import java.util.*;
+
+public class AddressBook_Application {
+	/**
+	 * Declaring addressBook a class variable, available as a class object. making
+	 * it global makes it available to use in a method.
+	 * 
+	 */
+	static ArrayList<Person> addressBook = new ArrayList<Person>();
+
+	/**
+	 * The main method processes the array list of adressBook and allows the user to
+	 * either create, retrieve, update, or delete a contact from the the
+	 * addressBook.
+	 * 
+	 * @param String[] args is a String array that takes data types, whether its
+	 *        declared as a double, int or char, and converts them into string
+	 *        statements.
+	 * @return void, nothing.
+	 * 
+	 */
+	public static void main(String[] args) {
+
+		String firstName = null, lastName = null, address = null, city = null, state = null, eMail = null,
+				phoneNumber = null, officeHours = null;
+		int zipcode = 0, entry = 0;
+		double gpa = 0;
+		int mainMenu = 0;
+
+		do {
+			Scanner input = new Scanner(System.in);
+			System.out.println("\t\n\t   ADDRESS BOOK");
+			System.out.println();
+			System.out.println("\t 1) Create new Contact: ");
+			System.out.println("\t 2) Retrive Contact   : ");
+			System.out.println("\t 3) Update Contact    : ");
+			System.out.println("\t 4) Delete Contact    : ");
+			System.out.println("\t 5) Exit Menu         : ");
+			System.out.print("\n\nOption: ");
+			mainMenu = Integer.parseInt(input.nextLine());
+
+			switch (mainMenu) {
+			case 1:
+				// Creates new contact
+				// Sub-menu asks whether contact created is either a Student or Teacher
+				do {
+					System.out.println("\nIs this new contact a \n\t1) Student \n\t2) Teacher");
+					System.out.print("option: ");
+					entry = Integer.parseInt(input.nextLine());
+
+					if (!(entry > 0 && entry < 3)) {
+						System.out.println("\n\t Error: Invalid Entry Value!");
+					}
+
+				} while (!(entry > 0 && entry < 3));
+
+				System.out.print("\nFirst Name: ");
+				firstName = input.nextLine();
+				System.out.print("\nLast Name: ");
+				lastName = input.nextLine();
+				System.out.print("\nAdress: ");
+				address = input.nextLine();
+				System.out.print("\nZipcode: ");
+				zipcode = Integer.parseInt(input.nextLine());
+				System.out.print("\nCity: ");
+				city = input.nextLine();
+				System.out.print("\nState: ");
+				state = input.nextLine();
+				System.out.print("\nE-mail: ");
+				eMail = input.nextLine();
+				System.out.print("\nPhone Number: ");
+				phoneNumber = input.nextLine();
+
+				if (entry == 1) {
+					System.out.print("\n Enter GPA: ");
+					gpa = input.nextDouble();
+
+					// Inserts new contact for Student
+					addressBook.add(
+							new Student(firstName, lastName, phoneNumber, eMail, address, city, state, zipcode, gpa));
+				} else {
+					System.out.print("\n Enter Office Hours: ");
+					officeHours = input.next();
+
+					// Inserts new contact for Teacher
+					addressBook.add(new Teacher(firstName, lastName, phoneNumber, eMail, address, city, state, zipcode,
+							officeHours));
+				}
+				break;
+			case 2:
+				// Retrieve contact information by calling the method
+				retrieveData();
+				break;
+			case 3:
+				// Update Contact
+				updateContact(firstName, lastName, address, zipcode, city, state, phoneNumber);
+				break;
+			case 4:
+				// Deletes
+				System.out.println("What is the first name of the contact you want to delete: ");
+				String del = input.next();
+				Object obj = del;
+				for (int i = 0; i < addressBook.size(); i++) {
+					addressBook.remove(i);
+				}
+				break;
+			}
+
+		} while (mainMenu != 5);
+	}
+
+	/**
+	 * The retrieveData() method sorts the address book alphabetically by first name
+	 * and then retrieves the contact based upon a search for the the first name of
+	 * the contact.
+	 * 
+	 * @param void
+	 * @return None
+	 */
+	public static void retrieveData() {
+
+		// The array is sorted alphabetically based on first name
+		Scanner input = new Scanner(System.in);
+		Collections.sort(addressBook, Person.fNameComparator);
+
+		// Displays elements in the address book
+		for (int i = 0; i < addressBook.size(); ++i) {
+			System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+			System.out.println();
+		}
+		System.out.println();
+		System.out.print("\nEnter the first name of the contact you would like to Retrieve: ");
+		String entryName = input.nextLine();
+		System.out.println();
+
+		// Retrieves contact inputed by the user
+		for (int i = 0; i < addressBook.size(); ++i) {
+			if (addressBook.get(i).getFirstName().toLowerCase().equals(entryName.toLowerCase())) {
+				System.out.println("\nContact " + (i + 1) + " " + addressBook.get(i));
+			}
+		}
+	}
+
+	/**
+	 * The updateContact() method allows the user to change the contacts information
+	 * of which they want to change.
+	 * 
+	 * @param String firstName String lastName String address int zipcode String
+	 *               city String state String phoneNumber
+	 * @return None
+	 */
+	public static void updateContact(String firstName, String lastName, String address, int zipcode, String city,
+			String state, String phoneNumber) {
+
+		Scanner input = new Scanner(System.in);
+		int updateEntry = 0;
+		System.out.print("\nEnter the first name of the contact you would like to Retrieve: ");
+		String entryName = input.nextLine();
+		System.out.println();
+
+		// Retrieves contact inputed by the user
+		for (int i = 0; i < addressBook.size(); ++i) {
+			if (addressBook.get(i).getFirstName().toLowerCase().equals(entryName.toLowerCase())) {
+				System.out.println("\nContact " + (i + 1) + " " + addressBook.get(i));
+			}
+		}
+			do {
+				System.out.println("\nWhat would you like to update:");
+				System.out.print(
+						"\n\t1)First name\n\t2)Last name\n\t3)Address\n\t4)Zipcode\n\t5)City\n\t6)State\n\t7)Phone number\n\t8)Exit");
+				updateEntry = input.nextInt();
+
+				switch (updateEntry) {
+
+				case 1:
+					System.out.print("\nEnter the first name of the contact: ");
+					String entryFirstName = input.next();
+					for (int i = 0; i < addressBook.size(); i++) {
+						addressBook.get(i).setFirstName(entryFirstName);
+						System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+					}
+					break;
+				case 2:
+					System.out.print("\nEnter the last name of the contact: ");
+					String entryLastName = input.next();
+					for (int i = 0; i < addressBook.size(); i++) {
+						addressBook.get(i).setLastName(entryLastName);
+						System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+					}
+					break;
+				case 3:
+					System.out.print("\nEnter the address of the contact: ");
+					String entryAddress = input.next();
+					for (int i = 0; i < addressBook.size(); i++) {
+						addressBook.get(i).setAddress(entryAddress);
+						System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+					}
+					break;
+				case 4:
+					System.out.print("\nEnter the zipcode of the contact: ");
+					int entryZip = input.nextInt();
+					for (int i = 0; i < addressBook.size(); i++) {
+						addressBook.get(i).setZip(entryZip);
+						System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+					}
+					break;
+				case 5:
+					System.out.print("\nEnter the city of the contact: ");
+					String entryCity = input.next();
+					for (int i = 0; i < addressBook.size(); i++) {
+						addressBook.get(i).setCity(entryCity);
+						System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+					}
+					break;
+				case 6:
+					System.out.print("\nEnter the state of the contact: ");
+					String entryState = input.next();
+					for (int i = 0; i < addressBook.size(); i++) {
+						addressBook.get(i).setState(entryState);
+						System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+					}
+					break;
+				case 7:
+					System.out.print("\nEnter the phone number of the contact: ");
+					String entryPhone = input.next();
+					for (int i = 0; i < addressBook.size(); i++) {
+						addressBook.get(i).setPhoneNumber(entryPhone);
+						System.out.println("Contact " + (i + 1) + " " + addressBook.get(i));
+					}
+					break;
+				case 8:
+					System.out.println("Your new information has been saved");
+					break;
+				default:
+					System.out.println("\n\t Error: Invalid Entry Value!");
+				}
+			} while (updateEntry != 8);
+		}
+	}
+
