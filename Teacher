@@ -1,0 +1,60 @@
+
+public class Teacher extends Person {
+	/**
+	 * Constructor that reaches out to the super class of person, and establishes
+	 * officeHours for teacher
+	 * 
+	 * @param firstName
+	 * @param lastName
+	 * @param phoneNumber
+	 * @param email
+	 * @param address
+	 * @param city
+	 * @param state
+	 * @param zip
+	 * @param gpa
+	 * 
+	 * @return none.
+	 */
+	public Teacher(String firstName, String lastName, String phoneNumber, String email, String address, String city,
+			String state, int zip, String officeHours) {
+		super(firstName, lastName, phoneNumber, email, address, city, state, zip);
+		this.officeHours = officeHours;
+	}
+
+	private String officeHours;
+
+	/**
+	 * getOfficeHours gets value for officeHours.
+	 * 
+	 * @param None.
+	 * @return double.
+	 */
+	public String getOfficeHours() {
+		return officeHours;
+	}
+
+	/**
+	 * setOfficeHours sets officeHours given by parameter to the field of
+	 * officeHours.
+	 * 
+	 * @param String OfficeHours
+	 * @return void, none.
+	 */
+	public void setOfficeHours(String officeHours) {
+		this.officeHours = officeHours;
+	}
+
+	/**
+	 * 
+	 * @see Person#toString(), displays the toString from super of Person class as
+	 * well as the Office Hours for the subclass of Teacher.
+	 * 
+	 * @param void, none.
+	 * @return String
+	 * 
+	 */
+	public String toString() {
+		return "\nTeacher's Office Hours:\t\t" + officeHours + super.toString();
+	}
+}
